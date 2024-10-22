@@ -1,0 +1,148 @@
+﻿@model School.Models.AdminLogin
+@{
+    Layout = null;
+    var CurrentController = ViewContext.RouteData.Values["controller"]?.ToString(); // hangi controllerda kontrolü
+}
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Yönetici Girişi</title>
+    <link rel="shortcut icon" type="image/png" href="~/AdminPanel/src/assets/images/logos/seodashlogo.png" />
+    <link rel="stylesheet" href="~/AdminPanel/src/assets/libs/simplebar/dist/simplebar.min.css">
+    <link rel="stylesheet" href="~/AdminPanel/src/assets/css/styles.min.css" />
+</head>
+<body>
+    <!--  Body Wrapper -->
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+         data-sidebar-position="fixed" data-header-position="fixed">
+        <!-- Sidebar Start -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div>
+                <div class="brand-logo d-flex align-items-center justify-content-between">
+                    <h4>Admin Girişi</h4>
+                    <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                        <i class="ti ti-x fs-8"></i>
+                    </div>
+                </div>
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                    <ul id="sidebarnav">
+                        <li class="nav-small-cap">
+                            <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-6" class="fs-6"></iconify-icon>
+                            <span class="hide-menu">AUTH</span>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link @(CurrentController == "Admins" ? "active" : "")" href="@Url.Action("AdminLogin","Admins")" aria-expanded="false">
+                                <span>
+                                    <iconify-icon icon="solar:login-3-bold-duotone" class="fs-6"></iconify-icon>
+                                </span>
+                                <span class="hide-menu">Admin Login</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!--  Sidebar End -->
+        <!--  Main wrapper -->
+        <div class="body-wrapper">
+            <!--  Header Start -->
+            <header class="app-header">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <ul class="navbar-nav">
+                        <li class="nav-item d-block d-xl-none">
+                            <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                                <i class="ti ti-menu-2"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </header> 
+            <!--  Header End -->
+            <div class="container-fluid">
+                <div class="card w-100 h-100 position-relative overflow-hidden">
+                    <div class="card-body">
+                        <!--  Body Wrapper -->
+                        <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+                             data-sidebar-position="fixed" data-header-position="fixed">
+                            <div class="position-relative overflow-hidden radial-gradient pt-5 pb-5 d-flex align-items-center justify-content-center">
+                                <div class="d-flex align-items-center justify-content-center w-100">
+                                    <div class="row justify-content-center w-100">
+                                        <div class="col-md-8 col-lg-6 col-xxl-3">
+                                            <div class="card mb-0">
+                                                <div class="card-body">
+                                                    <h3 class="text-center">Admin Giriş</h3>
+                                                    <form asp-action="AdminLogin" method="post">
+                                                        @Html.AntiForgeryToken()
+                                                        <div class="mb-3">
+                                                            <label asp-for="AdminLogin_Name" class="control-label"></label>
+                                                            <input asp-for="AdminLogin_Name" type="text" class="form-control" />
+                                                            <span asp-validation-for="AdminLogin_Name" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="mb-4">
+                                                            <label asp-for="AdminLogin_Password" class="control-label"></label>
+                                                            <input asp-for="AdminLogin_Password" type="text" class="form-control" />
+                                                            <span asp-validation-for="AdminLogin_Password" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="d-flex align-items-center justify-content-between mb-4">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input primary" type="checkbox" value="true" name="RememberMe" id="flexCheckChecked" checked>
+                                                                <label class="form-check-label text-dark" for="flexCheckChecked">
+                                                                    Beni Hatırla
+                                                                </label>
+                                                            </div>
+                                                            <a class="text-primary fw-bold" href="./index.html">Parolanımızı Unuttunuz ?</a>
+                                                        </div>
+                                                        <input type="submit" value="Giriş Yap" class="btn btn-primary w-100 py-8 fs-4 mb-4" />
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/AdminPanel/src/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="~/AdminPanel/src/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/AdminPanel/src/assets/libs/simplebar/dist/simplebar.js"></script>
+    <script src="~/AdminPanel/src/assets/js/sidebarmenu.js"></script>
+    <script src="~/AdminPanel/src/assets/js/app.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+    <script>
+        window.addEventListener('resize', function () {
+            var element = document.querySelector('.cardMobileView');
+
+            if (window.innerWidth <= 991) {
+                element.classList.remove('card'); // 991px altına düşerse card sınıfını kaldır
+            } else {
+                element.classList.add('card'); // 991px üstüne çıkarsa tekrar ekle
+            }
+        });
+
+        // Sayfa yüklendiğinde de kontrol et
+        document.addEventListener('DOMContentLoaded', function () {
+            var element = document.querySelector('.cardMobileView');
+
+            if (window.innerWidth <= 991) {
+                element.classList.remove('card');
+            } else {
+                element.classList.add('card');
+            }
+        });
+    </script>
+</body>
+</html>
+   
+   
+

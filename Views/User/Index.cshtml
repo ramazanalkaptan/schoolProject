@@ -1,0 +1,49 @@
+﻿@model IEnumerable<School.Models.Register>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Users</h1>
+<div class="d-flex justify-content-between">
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <div class="input-group w-25">
+        <input type="search" id="searchInput" class="form-control rounded-start" placeholder="Arama yapınız..." aria-label="Search">
+    </div>
+</div>
+
+<table class="table" id="usersTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Register_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Register_Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Register_Password)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="usersTableBody">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Register_Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Register_Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.Register_Password)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Register_Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Register_Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Register_Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

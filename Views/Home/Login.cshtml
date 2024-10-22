@@ -1,0 +1,50 @@
+﻿@model School.Models.Login
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!-- inner banner -->
+<div class="inner-banner-w3ls py-5" id="home">
+    <div class="container py-xl-5 py-lg-3">
+        <!-- login  -->
+        <div class="modal-body my-5 pt-4">
+            <h3 class="title-w3 mb-5 text-center text-wh font-weight-bold">Login Now</h3>
+            @if (TempData["MessageSuccess"] != null)
+            {
+
+                <div class="alert alert-success">
+                    @TempData["MessageSuccess"]
+                </div>
+
+            }
+            <form action="Login" method="post">
+                <div class="form-group">
+                    @Html.AntiForgeryToken()
+                    <label asp-for="Login_Name" class="col-form-label"></label>
+                    <input asp-for="Login_Name" type="text" class="form-control">
+                    <span asp-validation-for="Login_Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Login_Password" class="col-form-label"></label>
+                    <input asp-for="Login_Password" type="text" class="form-control">
+                    <span asp-validation-for="Login_Password" class="text-danger"></span>
+                </div>
+                <div class="row sub-w3l mt-3 mb-5">
+                    <div class="col-sm-6 sub-w3layouts_hub">
+                        <input type="checkbox" name="RememberMe" id="Remember" value="true" checked>
+                        <label for="Remember" class="text-li text-style-w3ls">
+                            <span></span>Beni hatırla?
+                        </label>
+                    </div>
+                    <div class="col-sm-6 forgot-w3l text-sm-right">
+                        <a href="@Url.ActionLink("UserForgotPassword","Home")" class="text-li text-style-w3ls">Şifrenizi unuttunuz?</a>
+                    </div>
+                </div>
+                <button type="submit" class="btn button-style-w3">Giriş</button>
+            </form>
+        </div>
+        <!-- //login -->
+    </div>
+</div>
+<!-- //inner banner -->
