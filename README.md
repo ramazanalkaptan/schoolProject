@@ -1,4 +1,4 @@
-# schoolProject
+# schoolProject (C#)
 - Admin sayfası çalışması yapılmıştır.(Create,delete,detail,edit)
 - User işlemleri yapılmıştır.(Create,delete,detail,edit)
 - authentication
